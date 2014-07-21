@@ -3,7 +3,7 @@
 ;###   TextOverride Tool   ###
 ;#############################
 ;
-;version 2.7.3
+;version 2.7.4
 ;
 ;by Matthew D. Jordan
 ;
@@ -29,14 +29,15 @@
 	;("shortcut" "replacement text" )
 	;NB - "literalflag" & "matchflag" are keywords used by this script, do not change them - Thanks!
 	(setq to_shortcut_list '(
-		("c"   "<>  O.C."       )
-		("ct"  "<> O.C. TYP."   )
-		("g"   "<> GAP"         )
-		("gt"  "<> GAP TYP."    )
-		("t"   "<> TYP."        )
-		("th"  "<> THRU."       )
-		("nct" "<>\\PO.C. TYP." )
-		("s"   "<> (SKIN)"      )
+		("c"	"<>  OC"        )
+		("ct"	"<> OC TYP"     )
+		("ctc"	"<>  CTC"       )
+		("g"	"<> GAP"        )
+		("gt"	"<> GAP TYP"    )
+		("t"	"<> TYP"        )
+		("th"	"<> THRU."      )
+		("nct"	"<>\\POC TYP"   )
+		("s"	"<> (SKIN)"     )
 		("r"	"REAM TO <>"	)
 		(""		"<>"            )
 		("p"	"(<>)"          )
