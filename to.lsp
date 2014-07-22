@@ -2,7 +2,7 @@
 ;###   TextOverride Tool   ###
 ;#############################
 ;
-;version 2.8.1
+;version 2.8.2
 ;
 ;by Matthew D. Jordan
 ;
@@ -14,29 +14,33 @@
 
 ;Remember, use text overrides only for good, not evil.
 
-;Note the lack of error handling.
-;Does that make me a bad person?
 
+(defun c:TEXTOVERRIDE (/ temp NewDimValue eset eset2 to_shortcut_list *error*)
 
-(defun c:TEXTOVERRIDE (/ temp NewDimValue eset eset2 to_shortcut_list)
+	(defun *error* (#msg)
+		(and #msg
+			(not (wcmatch (strcase #msg) "*BREAK*,*CANCEL*,*QUIT*"))
+			(princ (strcat "\nError: " #msg))
+		)
+	) ;defun *error*
 
 	;set shortcuts and text for each variable
 	;("shortcut" "replacement text" )
 	;NB - "literalflag" & "matchflag" are keywords used by this script, do not change them - Thanks!
 	(setq to_shortcut_list '(
-		("c"   "<>  OC"       )
-		("ct"  "<> OC TYP"   )
-		("ctc"  "<> CTC"   )
-		("g"   "<> GAP"         )
-		("gt"  "<> GAP TYP"    )
-		("t"   "<> TYP"        )
-		("th"  "<> THRU."       )
-		("nct" "<>\\POC TYP" )
-		("s"   "<> (SKIN)"      )
-		(""		"<>"              )
-		("p"	"(<>)"            )
-		("m"	"matchflag"		    )
-		("l"	"literalflag"	    )))
+		("c"	"<>  OC"		)
+		("ct"	"<> OC TYP"		)
+		("ctc"	"<> CTC"		)
+		("g"	"<> GAP"        )
+		("gt"	"<> GAP TYP"	)
+		("t"	"<> TYP"		)
+		("th"	"<> THRU."		)
+		("nct"	"<>\\POC TYP"	)
+		("s"	"<> (SKIN)"		)
+		(""		"<>"			)
+		("p"	"(<>)"			)
+		("m"	"matchflag"		)
+		("l"	"literalflag"	)))
 
 	(setq eset (ssget '((0 . "DIMENSION"))))
 	(while (eq eset nil)
