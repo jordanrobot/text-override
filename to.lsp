@@ -1,9 +1,8 @@
-(prompt "\nText Override loaded...")
 ;#############################
 ;###   TextOverride Tool   ###
 ;#############################
 ;
-;version 2.7.4
+;version 2.8.1
 ;
 ;by Matthew D. Jordan
 ;
@@ -15,34 +14,29 @@
 
 ;Remember, use text overrides only for good, not evil.
 
+;Note the lack of error handling.
+;Does that make me a bad person?
 
-(defun c:TO (/ temp NewDimValue eset eset2 to_shortcut_list *error*)
 
-  (defun *error* (#msg)
-    (and #msg
-         (not (wcmatch (strcase #msg) "*BREAK*,*CANCEL*,*QUIT*"))
-         (princ (strcat "\nError: " #msg))
-    )
-  )
+(defun c:TEXTOVERRIDE (/ temp NewDimValue eset eset2 to_shortcut_list)
 
 	;set shortcuts and text for each variable
 	;("shortcut" "replacement text" )
 	;NB - "literalflag" & "matchflag" are keywords used by this script, do not change them - Thanks!
 	(setq to_shortcut_list '(
-		("c"	"<>  OC"        )
-		("ct"	"<> OC TYP"     )
-		("ctc"	"<>  CTC"       )
-		("g"	"<> GAP"        )
-		("gt"	"<> GAP TYP"    )
-		("t"	"<> TYP"        )
-		("th"	"<> THRU."      )
-		("nct"	"<>\\POC TYP"   )
-		("s"	"<> (SKIN)"     )
-		("r"	"REAM TO <>"	)
-		(""		"<>"            )
-		("p"	"(<>)"          )
-		("m"	"matchflag"		)
-		("l"	"literalflag"	)))
+		("c"   "<>  OC"       )
+		("ct"  "<> OC TYP"   )
+		("ctc"  "<> CTC"   )
+		("g"   "<> GAP"         )
+		("gt"  "<> GAP TYP"    )
+		("t"   "<> TYP"        )
+		("th"  "<> THRU."       )
+		("nct" "<>\\POC TYP" )
+		("s"   "<> (SKIN)"      )
+		(""		"<>"              )
+		("p"	"(<>)"            )
+		("m"	"matchflag"		    )
+		("l"	"literalflag"	    )))
 
 	(setq eset (ssget '((0 . "DIMENSION"))))
 	(while (eq eset nil)
@@ -67,12 +61,103 @@
 								(setq eset2 (entget (car (entsel "\nSelect source dimension: ")))))
 				(setq NewDimValue (cdr (assoc 1 eset2)))))
 
+	(to:text_override_function NewDimValue eset)
+	(princ)
+)
+
+(defun to:text_override_function ( val eset / )
 	;set textoverides via entmod
 	(setq i 0)
 	(repeat (sslength eset)
 		(setq temp (entget (ssname eset i)))
-		(setq temp (subst (cons 1 NewDimValue) (assoc 1 temp) temp))
+		(setq temp (subst (cons 1 val) (assoc 1 temp) temp))
 		(entmod temp)
 		(setq i(+ i 1)))
 
-	(princ))
+	(princ)
+)
+
+(defun c:to_typical (/)
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "<> TYP." eset)
+)
+
+(defun c:to_oncenter (/)
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "<> O.C." eset)
+)
+
+(defun c:to_oncentertypical (/)
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "<> O.C. TYP." eset)
+)
+
+(defun c:to_skin (/)
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "<> SKIN" eset)
+)
+
+(defun c:to_gap (/)
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "<> GAP" eset)
+)
+
+(defun c:to_gaptypical (/)
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "<> GAP TYP." eset)
+)
+
+
+(defun c:to_parenth (/)
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "(<>)" eset)
+)
+
+(defun c:to_reset (/)
+
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "" eset)
+)
+
+
+(defun c:to_ream (/)
+
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "REAM <>" eset)
+)
