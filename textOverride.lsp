@@ -29,7 +29,8 @@
 	(setq to_shortcut_list '(
 		("c"	"<> OC"			)
 		("ct"	"<> OC TYP"		)
-		("ctc"	"<> CTC"		)
+		("cc"	"<> CTC"		)
+		("cct"	"<> CTC TYP"	)
 		("g"	"<> GAP"        )
 		("gt"	"<> GAP TYP"	)
 		("t"	"<> TYP"		)
