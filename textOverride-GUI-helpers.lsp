@@ -2,7 +2,7 @@
 ;###   TextOverride GUI Helpers   ###
 ;####################################
 ;
-;version 2.8.3
+;version 2.8.4
 ;
 ;by Matthew D. Jordan
 ;
@@ -36,6 +36,24 @@
 				 (setq eset (ssget '((0 . "DIMENSION")))))
 
 	(to:text_override_function "<> OC TYP" eset)
+)
+
+(defun c:to_centertocentertypical (/)
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "<> CTC" eset)
+)
+
+(defun c:to_centerttocenterypical (/)
+	(setq eset (ssget '((0 . "DIMENSION"))))
+	(while (eq eset nil)
+				 (prompt "  Nothing Selected!")
+				 (setq eset (ssget '((0 . "DIMENSION")))))
+
+	(to:text_override_function "<> CTC TYP" eset)
 )
 
 (defun c:to_skin (/)
