@@ -2,7 +2,7 @@
 ;###   TextOverride Tool   ###
 ;#############################
 ;
-;version 2.8.3
+;version 2.8.4
 ;
 ;by Matthew D. Jordan
 ;
