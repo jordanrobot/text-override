@@ -5,7 +5,7 @@ by: Matthew D. Jordan
 
 ### About
 
-A simple Autocad lisp routine to modify a dimension's text override value directly via the CLI.  The important feature is shortcuts for frequently used overrides, easily edited depending on your needs.  Clear a text override by entering an empty string at the command line. If you want to use a chuck of text that includes space characters, use the Literal option.
+A simple interface to modify a dimension's text override value directly.  It even features shortcuts for frequently used overrides.  Clear a text override by entering an empty string at the command line. If you want to use a chuck of text that includes space characters, use the Literal option.
 
 ### Use:
 
@@ -19,19 +19,18 @@ Start Text Override by entering:
 
 ### Built-In Shortcuts:
 
-Shortcut... | Means... 
-:---------: | --------
-t           | 5'-0" TYP
-c           | 5'-0" OC
-ct          | 5'-0" OC TYP
-cc          | 5'-0" CTC
-cct         | 5'-0" CTC TYP
-nct         | 5'-0" <newline> OC TYP
-th          | 5'-0" THRU
-s           | 5'-0" (Skin)
-p           | (5'-0")
-<none>      | reset text override
-
+|Shortcut...|Means...|
+|:--:|--|
+|t|5'-0" TYP|
+|c|5'-0" OC|
+|ct|5'-0" OC TYP|
+|cc|5'-0" CTC|
+|cct|5'-0" CTC TYP|
+|nct|5'-0" <newline> OC TYP|
+|th|5'-0" THRU|
+|s|5'-0" (Skin)|
+|p|(5'-0")|
+|<none>|reset text override|
 
 ### GUI Helpers
 
